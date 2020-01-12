@@ -21,7 +21,6 @@ import {
 } from 'react-native';
 
 import axios from 'axios'
-import cheerio from 'react-native-cheerio'
 import xml2js from 'react-native-xml2js'
 
 
@@ -41,6 +40,7 @@ class Home extends React.Component{
     }
     componentDidMount(){
         this.fetchNews()
+        setInterval(this.fetchNews.bind(this), 5000)
     }
     fetchNews(){
         axios.get('https://m.diarioonline.com.br/rss')
