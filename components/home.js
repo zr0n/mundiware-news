@@ -102,6 +102,8 @@ class Home extends React.Component{
             </Modal>
             <FlatList
                 data = {this.state.news}
+                keyExtractor={item => item.title}
+                style= {styles.container}
                 renderItem = {({item}) => (
                     <TouchableOpacity
                         style = {styles.item}
@@ -130,6 +132,9 @@ const styles = StyleSheet.create({
   image: {
       width: width * .9,
       height: 300
+  },
+  container: {
+      marginBottom: 20
   }
 });
 
