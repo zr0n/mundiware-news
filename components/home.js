@@ -40,7 +40,7 @@ class Home extends React.Component{
     }
     componentDidMount(){
         this.fetchNews()
-        setInterval(this.fetchNews.bind(this), 5000)
+        //setInterval(this.fetchNews.bind(this), 5000)
     }
     fetchNews(){
         axios.get('https://m.diarioonline.com.br/rss')
@@ -51,11 +51,15 @@ class Home extends React.Component{
                     const news = result.rss.channel[0].item
                     let newsParsed = []
                     news.forEach(element => {
+                        let image = ""
+                        if(element.enclosure)
+                            image = element.enclosure[0].$.url 
                         newsParsed.push({
                             title: element.title[0],
-                            image: element.enclosure[0].$.url,
+                            image: image,
                             description: element.description[0]
                         })
+                        
                     });
                     this.setState({ news: newsParsed })
                 }
@@ -66,6 +70,10 @@ class Home extends React.Component{
                     
             })
 
+        })
+        .catch(err => {
+            console.log("Error making the request")
+            //console.error(err)
         })
     }
     showModal(item){
@@ -109,7 +117,12 @@ class Home extends React.Component{
                         style = {styles.item}
                         onPress = {() => this.showModal(item)}
                         >
-                        <Text>{item.title}</Text>
+                        <Image
+                            style = {styles.itemImage}
+                            source = {{uri: item.image}}>
+
+                        </Image>
+                        <Text style = {styles.itemText}>{item.title}</Text>
                     </TouchableOpacity>
                 )}
             >
@@ -124,7 +137,17 @@ const styles = StyleSheet.create({
   item: {
       borderWidth: 1,
       margin: 5,
-      padding: 3
+      padding: 3,
+      flexDirection: 'row'
+  },
+  itemText:{
+    flexWrap: 'wrap',
+    flex: 1
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+    marginRight: 10
   },
   description: {
       padding: 10
