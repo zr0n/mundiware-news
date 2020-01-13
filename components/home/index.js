@@ -50,7 +50,7 @@ class Home extends React.Component{
                     const news = result.rss.channel[0].item
                     let newsParsed = []
                     news.forEach(element => {
-                        let image = ""
+                        let image = "https://via.placeholder.com/100x100"
                         if(element.enclosure)
                             image = element.enclosure[0].$.url 
                         newsParsed.push({
