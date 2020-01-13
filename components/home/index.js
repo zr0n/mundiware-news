@@ -8,7 +8,6 @@
 
 import React from 'react';
 import {
-  StyleSheet,
   View,
   FlatList,
   TouchableOpacity,
@@ -17,11 +16,11 @@ import {
   Button,
   ScrollView,
   Image,
-  Dimensions
 } from 'react-native';
 
 import axios from 'axios'
 import xml2js from 'react-native-xml2js'
+import styles from './styles'
 
 
 class Home extends React.Component{
@@ -132,33 +131,5 @@ class Home extends React.Component{
         );
     }
 }
-var {width} = Dimensions.get('window');
-const styles = StyleSheet.create({
-  item: {
-      borderWidth: 1,
-      margin: 5,
-      padding: 3,
-      flexDirection: 'row'
-  },
-  itemText:{
-    flexWrap: 'wrap',
-    flex: 1
-  },
-  itemImage: {
-    width: 50,
-    height: 50,
-    marginRight: 10
-  },
-  description: {
-      padding: 10
-  },
-  image: {
-      width: width * .9,
-      height: 300
-  },
-  container: {
-      marginBottom: 20
-  }
-});
 
 export default Home;
